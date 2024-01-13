@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       },
                         icon: const Icon(Icons.water_drop_outlined,color: Colors.white,),
-                        label: Text("Air mineral", style: TextStyle(
+                        label: Text("Penyedia Air", style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       },
                         icon: const Icon(Icons.engineering,color: Colors.white,),
-                        label: Text("Jasa", style: TextStyle(
+                        label: Text("Penyedia Jasa", style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),
@@ -60,21 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           backgroundColor: MaterialStateProperty.all(Colors.grey),
                         ),
                       ),
-                      TextButton.icon(onPressed: () async {Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>Jasa(),
-                        ),
-                      );
-                      },
-                        icon: const Icon(Icons.water,color: Colors.white,),
-                        label: Text("Air", style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.grey),
-                        ),
-                      ),
+
                     ],
               ),
         ),
