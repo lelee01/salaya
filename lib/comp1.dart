@@ -9,7 +9,7 @@ class Comp1 extends StatefulWidget {
 
 class _Comp1State extends State<Comp1> {
 String map = 'https://maps.app.goo.gl/dRj7DNdLAUKPD2Px8?g_st=iw';
-String wa = 'https://api.whatsapp.com/send/?phone=082111127815&text&type=phone_number&app_absent=0';
+String wa = 'https://wa.me/6282111127815?';
 
   @override
   Widget build(BuildContext context) {
