@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salaya/jasa.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -14,19 +15,71 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            Container(
+        child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(""),
+                  image: AssetImage("aset/bg.png"),
                   fit: BoxFit.cover,
                 )
               ),
-            )
-          ],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset("aset/logo.png",
+                  width: 200,
+                  height: 200,),
+                  SizedBox(height: 20,width: 800,),
+                  TextButton.icon(onPressed: () async {Navigator.push(context,
+                        MaterialPageRoute(builder: (context)=>Jasa(),
+                        ),
+                      );
+                      },
+                        icon: const Icon(Icons.water_drop_outlined,color: Colors.white,),
+                        label: Text("Air mineral", style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.grey),
+                        ),
+                      ),
+                      TextButton.icon(onPressed: () async {Navigator.push(context,
+                        MaterialPageRoute(builder: (context)=>Jasa(),
+                        ),
+                      );
+                      },
+                        icon: const Icon(Icons.engineering,color: Colors.white,),
+                        label: Text("Jasa", style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.grey),
+                        ),
+                      ),
+                      TextButton.icon(onPressed: () async {Navigator.push(context,
+                        MaterialPageRoute(builder: (context)=>Jasa(),
+                        ),
+                      );
+                      },
+                        icon: const Icon(Icons.water,color: Colors.white,),
+                        label: Text("Air", style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.grey),
+                        ),
+                      ),
+                    ],
+              ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ), //
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

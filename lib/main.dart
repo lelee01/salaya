@@ -14,10 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Salaya',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: Colors.white,
         useMaterial3: true,
+        fontFamily:'ComicNeue',
       ),
       home: const MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
