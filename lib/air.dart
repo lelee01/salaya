@@ -1,17 +1,18 @@
 
 import 'package:flutter/material.dart';
-import 'package:salaya/jasa/comp1.dart';
-import 'package:salaya/jasa/comp2.dart';
-import 'package:salaya/jasa/comp3.dart';
-import 'package:salaya/jasa/comp4.dart';
+import 'package:salaya/air/comp1.dart';
+import 'package:salaya/air/comp2.dart';
+import 'package:salaya/air/comp3.dart';
+import 'package:salaya/air/comp4.dart';
+import 'package:salaya/air/comp5.dart';
 
-class Jasa extends StatefulWidget {
+class Air extends StatefulWidget {
 
   @override
-  State<Jasa> createState() => _JasaState();
+  State<Air> createState() => _AirState();
 }
 
-class _JasaState extends State<Jasa> {
+class _AirState extends State<Air> {
 
 
   @override
@@ -24,7 +25,7 @@ class _JasaState extends State<Jasa> {
         elevation: 0,
         iconTheme: IconThemeData(color : Colors.white),
         title: Text(
-          "Penyedia Jasa",
+          "Penyedia Air",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -44,25 +45,25 @@ class _JasaState extends State<Jasa> {
             children: [
               SizedBox(width: 800,),
               Container(
-                width: double.infinity,
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: Column(children: [
-                  Text(
-                    "Jasa Pemboran Air Artesis dan Services",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                  width: double.infinity,
+                  color: Colors.blue,
+                  alignment: Alignment.center,
+                  child: Column(children: [
+                    Text(
+                      "Jasa Penyedia Air",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Estimasi Harga",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                    Text(
+                      "Estimasi Harga",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                ],)
+                  ],)
               ),
               SizedBox(height: 20,),
               Container(
@@ -70,11 +71,7 @@ class _JasaState extends State<Jasa> {
                 color: Colors.grey,
                 alignment: Alignment.center,
                 child: Text(
-                  "Kedalaman sumur 20 m : Rp. 2.000.000 "
-                      "Kedalaman sumur 30 m : Rp. 3.000.000 "
-                      "Kedalaman sumur 40 m : Rp. 4.000.000 "
-                  "Kedalaman sumur 50 m : Rp. 5.000.000 "
-                  "",
+                  "Air per tangki : Rp. 250.000-350.000",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -98,12 +95,12 @@ class _JasaState extends State<Jasa> {
               SizedBox(height: 20,),
               TextButton(
                 onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp1()
+                  MaterialPageRoute(builder: (context)=>CompA1()
                     ,
                   ),
                 );
                 }, child: Text(
-                "Bandung Water Solution",style: TextStyle(
+                "Air Bersih Utama Mandiri",style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
               ),
@@ -115,12 +112,12 @@ class _JasaState extends State<Jasa> {
               SizedBox(height: 20,),
               TextButton(
                 onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp2()
+                  MaterialPageRoute(builder: (context)=>CompA2()
                     ,
                   ),
                 );
                 }, child: Text(
-                "Ady Water",style: TextStyle(
+                "Air Gunung Manglayang",style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
               ),
@@ -132,12 +129,12 @@ class _JasaState extends State<Jasa> {
               SizedBox(height: 20,),
               TextButton(
                 onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp3()
+                  MaterialPageRoute(builder: (context)=>CompA3()
                     ,
                   ),
                 );
                 }, child: Text(
-                "Aneka Filter",style: TextStyle(
+                "Zam Zam",style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
               ),
@@ -149,12 +146,29 @@ class _JasaState extends State<Jasa> {
               SizedBox(height: 20,),
               TextButton(
                 onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp4()
+                  MaterialPageRoute(builder: (context)=>CompA4()
                     ,
                   ),
                 );
                 }, child: Text(
-                "Filter Air",style: TextStyle(
+                "Al-Ma'Soem",style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+              ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.grey),
+                ),
+              ),
+              SizedBox(height: 20,),
+              TextButton(
+                onPressed: () async {Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=>CompA5()
+                    ,
+                  ),
+                );
+                }, child: Text(
+                "Tirta Raharja",style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
               ),

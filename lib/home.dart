@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salaya/jasa.dart';
+import 'package:salaya/air.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -31,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 200,),
                   SizedBox(height: 20,width: 800,),
                   TextButton.icon(onPressed: () async {Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>Jasa(),
+                        MaterialPageRoute(builder: (context)=>Air(),
                         ),
                       );
                       },
