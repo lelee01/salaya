@@ -52,7 +52,7 @@ class _daftarState extends State<daftar> {
         setState(() {
           _visible = false;
 
-          showMessage(msg["message"]);
+          showMessage("Email atau password salah");
         });
       }
     } else {
@@ -81,7 +81,7 @@ class _daftarState extends State<daftar> {
             children: <Widget>[
               Container(
                 child: Icon(
-                  Icons.exit_to_app,
+                  Icons.info_outline,
                   size: 30,
                   color: Colors.white,
                 ),
@@ -102,13 +102,13 @@ class _daftarState extends State<daftar> {
             children: <Widget>[
               Container(
                 child: Icon(
-                  Icons.cancel,
+                  Icons.check,
                   color: Colors.black,
                 ),
                 margin: EdgeInsets.only(right: 10),
               ),
               Text(
-                'Batalkan',
+                'OK',
                 style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
               )
             ],
@@ -126,12 +126,6 @@ class _daftarState extends State<daftar> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              centerTitle: true,
-              elevation: 0,
-              iconTheme: IconThemeData(color : Colors.white),
-            ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Container(
@@ -163,7 +157,7 @@ class _daftarState extends State<daftar> {
                       height: 10.0,
                     ),
                     Text(
-                      'Silakan Login Terlebih Dahulu',
+                      'Silakan Registrasi Akun',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 25.0,
@@ -373,17 +367,7 @@ class _daftarState extends State<daftar> {
     if(p1==p2){
       masuk();
     }else{
-      AlertDialog(
-        title: new Text("Password tidak sama"),
-        actions: <Widget>[
-          TextButton(
-            child: new Text("OK"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
+      showMessage("Password tidak cocok");
     }
   }
 

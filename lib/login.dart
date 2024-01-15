@@ -64,24 +64,62 @@ class _LoginState extends State<login> {
     }
   }
 
-  Future<dynamic> showMessage(String _msg) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text(_msg),
-          actions: <Widget>[
-            TextButton(
-              child: new Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-    return showMessage(_msg);
+  Future<dynamic> showMessage(String _msg) async {
+    switch (await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            contentPadding: EdgeInsets.zero,
+            children: <Widget>[
+              Container(
+                color: Colors.black,
+                padding: EdgeInsets.only(bottom: 10, top: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.info_outline,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      margin: EdgeInsets.only(bottom: 10),
+                    ),
+                    Text(
+                      _msg,
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, 0);
+                },
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.black,
+                      ),
+                      margin: EdgeInsets.only(right: 10),
+                    ),
+                    Text(
+                      'OK',
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          );
+        })) {
+      case 0:
+        break;
+    }
   }
 
   @override
