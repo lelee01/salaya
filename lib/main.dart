@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salaya/home.dart';
+import 'package:salaya/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily:'ComicNeue',
       ),
-      home: const MyHomePage(),
+      home: login(),
       debugShowCheckedModeBanner: false,
     );
   }
