@@ -1,5 +1,7 @@
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:salaya/mframe.dart';
 
 class CompA5 extends StatefulWidget {
 
@@ -9,6 +11,7 @@ class CompA5 extends StatefulWidget {
 
 class _CompA5State extends State<CompA5> {
   String map = 'https://maps.app.goo.gl/TMKsxSNNgB8bd2LA9?g_st=iw';
+  String mpp = 'https://www.google.com/maps/place/Pdam+Tirta+Raharja+Cabang+V+Cimahi/@-6.8680927,107.5354558,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68e46774ef26f5:0x3c69d10d5312f79e!8m2!3d-6.8680927!4d107.5354558!16s%2Fg%2F11b6bd_bnz?hl=id-ID&entry=ttu';
   String wa = 'http://www.tirtaraharja.co.id/';
 
   @override
@@ -27,8 +30,11 @@ class _CompA5State extends State<CompA5> {
           ),
         ),
       ),
-      body: Center(
+      body: SafeArea(
+        child:SingleChildScrollView(
+        child:Center(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("aset/bg.png"),
@@ -52,6 +58,12 @@ class _CompA5State extends State<CompA5> {
                         fontSize: 17,
                       ),
                     ),
+                    SafeArea(
+                        child: Container(
+                          width: double.infinity,
+                          height: 300,
+                          child: MapView(),
+                        )),
                     TextButton.icon(
                       onPressed: () {_bukaLink(map);},
                       icon: const Icon(Icons.pin_drop_outlined, color: Colors.white,),
@@ -91,7 +103,9 @@ class _CompA5State extends State<CompA5> {
             ],
           ),
         ),
-      ), //
+      ),
+    ),
+      ),//
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salaya/login.dart';
+import 'package:salaya/constant/constant.dart';
+import 'package:salaya/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Salaya',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: ColorConstants.themeColor,
+        primarySwatch: MaterialColor(0xFF0FADF1, ColorConstants.swatchColor),
         useMaterial3: true,
         fontFamily:'ComicNeue',
       ),
-      home: login(),
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,
     );
   }

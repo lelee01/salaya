@@ -7,6 +7,8 @@ import 'dart:async';
 import 'dart:core';
 import 'package:http/http.dart' as http;
 
+import 'constant/constant.dart';
+
 
 class daftar extends StatefulWidget{
 
@@ -18,6 +20,7 @@ class daftar extends StatefulWidget{
 class _daftarState extends State<daftar> {
   bool _visible = false;
 
+  final namaKontrol = TextEditingController();
   final usnKontrol = TextEditingController();
   final pasKontrol = TextEditingController();
   final pas2Kontrol = TextEditingController();
@@ -30,6 +33,7 @@ class _daftarState extends State<daftar> {
     });
 
     var data = {
+      'nama': namaKontrol.text,
       'email': usnKontrol.text,
       'pass': pasKontrol.text,
     };
@@ -124,15 +128,20 @@ class _daftarState extends State<daftar> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("aset/bg.png"),
-                      fit: BoxFit.cover,
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ColorConstants.themeColor,
+                          Colors.white,
+                        ]
                     )
                 ),
                 child:Column(
@@ -159,7 +168,7 @@ class _daftarState extends State<daftar> {
                     Text(
                       'Silakan Registrasi Akun',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: ColorConstants.textColor,
                           fontSize: 25.0,
                           fontWeight: FontWeight.bold),
                     ),
@@ -173,23 +182,22 @@ class _daftarState extends State<daftar> {
                           children: [
                             Theme(
                               data: new ThemeData(
-                                primaryColor: Colors.white,
-                                primaryColorDark: Colors.white,
-                                hintColor: Colors.white, //placeholder
+                                primaryColor: ColorConstants.textColor,
+                                hintColor: ColorConstants.textColor, //placeholder
                               ),
                               child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: usnKontrol,
+                                style: TextStyle(color: ColorConstants.textColor),
+                                controller: namaKontrol,
                                 decoration: InputDecoration(
                                   focusedBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
@@ -200,23 +208,23 @@ class _daftarState extends State<daftar> {
                                       style: BorderStyle.solid,
                                     ),
                                   ),
-                                  labelText: 'Masukan Username',
-                                  labelStyle: TextStyle(color:Colors.white),
+                                  labelText: 'Masukan Nama Lengkap',
+                                  labelStyle: TextStyle(color:ColorConstants.textColor),
                                   prefixIcon: const Icon(
-                                    Icons.person,
+                                    Icons.person_pin_rounded,
                                     color: Colors.white,
                                   ),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
-                                  hintText: 'Username',
+                                  hintText: 'Nama Lengkap',
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Mohon Isi Username';
+                                    return 'Mohon Isi Nama Lengkap';
                                   }
                                   return null;
                                 },
@@ -227,24 +235,76 @@ class _daftarState extends State<daftar> {
                             ),
                             Theme(
                               data: new ThemeData(
-                                primaryColor: Colors.white,
-                                primaryColorDark: Colors.white,
-                                hintColor: Colors.white, //placeholder
+                                primaryColor: ColorConstants.textColor,
+                                hintColor: ColorConstants.textColor, //placeholder
                               ),
                               child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: pasKontrol,
-                                obscureText: true,
+                                style: TextStyle(color: ColorConstants.textColor),
+                                controller: usnKontrol,
                                 decoration: InputDecoration(
                                   focusedBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  errorBorder: new OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 1.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  labelText: 'Masukan Email',
+                                  labelStyle: TextStyle(color:ColorConstants.textColor),
+                                  prefixIcon: const Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                  ),
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ColorConstants.textColor,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  hintText: 'Email',
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Mohon Isi Email';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            Theme(
+                              data: new ThemeData(
+                                primaryColor: ColorConstants.textColor,
+                                hintColor: ColorConstants.textColor, //placeholder
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(color: ColorConstants.textColor),
+                                controller: pasKontrol,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  focusedBorder: new OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ColorConstants.textColor,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  enabledBorder: new OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
@@ -257,12 +317,12 @@ class _daftarState extends State<daftar> {
                                   ),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
                                   labelText: 'Masukan Password',
-                                  labelStyle: TextStyle(color:Colors.white),
+                                  labelStyle: TextStyle(color:ColorConstants.textColor),
                                   prefixIcon: const Icon(
                                     Icons.lock,
                                     color: Colors.white,
@@ -282,24 +342,23 @@ class _daftarState extends State<daftar> {
                             ),
                             Theme(
                               data: new ThemeData(
-                                primaryColor: Colors.white,
-                                primaryColorDark: Colors.white,
-                                hintColor: Colors.white, //placeholder
+                                primaryColor: ColorConstants.textColor,
+                                hintColor: ColorConstants.textColor, //placeholder
                               ),
                               child: TextFormField(
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: ColorConstants.textColor),
                                 controller: pas2Kontrol,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   focusedBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
@@ -312,12 +371,12 @@ class _daftarState extends State<daftar> {
                                   ),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.white,
+                                      color: ColorConstants.textColor,
                                       style: BorderStyle.solid,
                                     ),
                                   ),
                                   labelText: 'Masukan Ulang Password',
-                                  labelStyle: TextStyle(color:Colors.white),
+                                  labelStyle: TextStyle(color:ColorConstants.textColor),
                                   prefixIcon: const Icon(
                                     Icons.lock,
                                     color: Colors.white,
@@ -344,7 +403,7 @@ class _daftarState extends State<daftar> {
                                   child: Text(
                                     'Daftar',
                                     style: TextStyle(fontSize: 18.0,
-                                        color: Colors.black),
+                                        color: ColorConstants.textColor),
                                   ),
                                 ),
                                 style: ButtonStyle(
@@ -355,12 +414,10 @@ class _daftarState extends State<daftar> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 200,)
                   ],
                 ),
               ),
-            )
-        )
+            ),
     );
   }
   void pass(p1,p2){

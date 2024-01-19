@@ -1,12 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:salaya/admin/admin.dart';
+import 'package:salaya/constant/akun.dart';
+import 'package:salaya/constant/constant.dart';
 import 'package:salaya/home.dart';
 import 'package:salaya/daftar.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:core';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class login extends StatefulWidget{
@@ -18,6 +22,7 @@ class login extends StatefulWidget{
 
 class _LoginState extends State<login> {
   bool _visible = false;
+  late final SharedPreferences prefs;
 
   final usnKontrol = TextEditingController();
   final pasKontrol = TextEditingController();
@@ -43,12 +48,22 @@ class _LoginState extends State<login> {
       if (msg['loginStatus'] == true) {
         setState(() {
           _visible = false;
+          Akun.fromJson(msg['userInfo']);
         });
 
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
             MaterialPageRoute(
                 builder: (context) => MyHomePage()));
-      } else {
+      } else if (msg['admin'] == true) {
+        setState(() {
+          _visible = false;
+
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(
+                  builder: (context) => admin()));
+        });
+      }
+      else {
         setState(() {
           _visible = false;
 
@@ -124,15 +139,20 @@ class _LoginState extends State<login> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("aset/bg.png"),
-                    fit: BoxFit.cover,
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        ColorConstants.themeColor,
+                        Colors.white,
+                      ]
                   )
               ),
               child:Column(
@@ -159,7 +179,7 @@ class _LoginState extends State<login> {
                 Text(
                   'Silakan Login Terlebih Dahulu',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: ColorConstants.textColor,
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -173,23 +193,22 @@ class _LoginState extends State<login> {
                       children: [
                         Theme(
                           data: new ThemeData(
-                            primaryColor: Colors.white,
-                            primaryColorDark: Colors.white,
-                            hintColor: Colors.white, //placeholder
+                            primaryColor: ColorConstants.textColor,
+                            hintColor: ColorConstants.textColor, //placeholder
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: ColorConstants.textColor),
                             controller: usnKontrol,
                             decoration: InputDecoration(
                               focusedBorder: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
                               enabledBorder: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
@@ -200,23 +219,23 @@ class _LoginState extends State<login> {
                                   style: BorderStyle.solid,
                                 ),
                               ),
-                              labelText: 'Masukan Username',
-                              labelStyle: TextStyle(color:Colors.white),
+                              labelText: 'Masukan Email',
+                              labelStyle: TextStyle(color:ColorConstants.textColor),
                               prefixIcon: const Icon(
                                 Icons.person,
                                 color: Colors.white,
                               ),
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
-                              hintText: 'Username',
+                              hintText: 'Email',
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Mohon Isi Username';
+                                return 'Mohon Isi Email';
                               }
                               return null;
                             },
@@ -227,24 +246,23 @@ class _LoginState extends State<login> {
                         ),
                         Theme(
                           data: new ThemeData(
-                            primaryColor: Colors.white,
-                            primaryColorDark: Colors.white,
-                            hintColor: Colors.white, //placeholder
+                            primaryColor: ColorConstants.textColor,
+                            hintColor: ColorConstants.textColor, //placeholder
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: ColorConstants.textColor),
                             controller: pasKontrol,
                             obscureText: true,
                             decoration: InputDecoration(
                               focusedBorder: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
                               enabledBorder: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
@@ -257,12 +275,12 @@ class _LoginState extends State<login> {
                               ),
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: ColorConstants.textColor,
                                   style: BorderStyle.solid,
                                 ),
                               ),
                               labelText: 'Masukan Password',
-                              labelStyle: TextStyle(color:Colors.white),
+                              labelStyle: TextStyle(color:ColorConstants.textColor),
                               prefixIcon: const Icon(
                                 Icons.lock,
                                 color: Colors.white,
@@ -289,7 +307,7 @@ class _LoginState extends State<login> {
                               child: Text(
                                 'Masuk',
                                 style: TextStyle(fontSize: 18.0,
-                                color: Colors.black),
+                                color: ColorConstants.textColor),
                               ),
                             ),
                             style: ButtonStyle(
@@ -301,7 +319,7 @@ class _LoginState extends State<login> {
                   ),
                 ),
               Text("Belum Punya Akun?",style:
-                TextStyle(color: Colors.white,fontSize: 18),),
+                TextStyle(color: ColorConstants.textColor,fontSize: 18),),
                 SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: () async {Navigator.push(context,
@@ -314,17 +332,15 @@ class _LoginState extends State<login> {
                     child: Text(
                       'Daftar',
                       style: TextStyle(fontSize: 18.0,
-                          color: Colors.black),
+                          color: ColorConstants.textColor),
                     ),
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white)),
                 ),
-                SizedBox(height: 200,)
               ],
             ),
           ),
-        )
         )
     );
   }
