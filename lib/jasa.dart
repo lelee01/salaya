@@ -1,9 +1,12 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:salaya/jasa/comp1.dart';
-import 'package:salaya/jasa/comp2.dart';
-import 'package:salaya/jasa/comp3.dart';
-import 'package:salaya/jasa/comp4.dart';
+import 'package:http/http.dart' as http;
+import 'package:salaya/constant/constant.dart';
+
+import 'comp.dart';
+import 'constant/comp.dart';
 
 class Jasa extends StatefulWidget {
 
@@ -12,159 +15,93 @@ class Jasa extends StatefulWidget {
 }
 
 class _JasaState extends State<Jasa> {
+  List<dynamic> data=[];
+
+  Future<String> getData() async{
+    var url = Uri.parse("https://pemweb-yakfi.000webhostapp.com/getComp.php");
+    var data = {
+      'kategori': 'jasa',
+    };
+
+    var response = await http.post(url, body: json.encode(data));
+    print (data);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      var msg = jsonDecode(response.body);
+      // Cast it to List<dynamic>
+      List<dynamic> dataCompList = msg['dataComp'];
+      setState(() {
+        this.data = dataCompList;
+      });
+    }else{
+      return'Gagal';
+    }
+    return'Berhasil';
+  }
+
+  @override
+  void initState(){
+    this.getData();
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        elevation: 0,
-        iconTheme: IconThemeData(color : Colors.white),
+        backgroundColor: ColorConstants.themeColor,
         title: Text(
-          "Penyedia Jasa",
+          "Penyedia Jasa dan Air",
           style: TextStyle(
-            color: Colors.white,
+            color: ColorConstants.textColor,
           ),
         ),
+        centerTitle: true,
       ),
+      extendBodyBehindAppBar: true,
       body: Center(
         child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("aset/bg.png"),
-                fit: BoxFit.cover,
-              )
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(width: 800,),
-              Container(
-                width: double.infinity,
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: Column(children: [
-                  Text(
-                    "Jasa Pemboran Air Artesis dan Services",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      ColorConstants.themeColor,
+                      Colors.white,
+                    ]
+                )
+            ),
+            child: ListView.builder(
+                itemCount: data == null ?0 : data.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Card(
+                    color: Colors.grey,
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          Comp.fromJson(data[index]);
+                        });
+                        // Navigate to another page using Navigator
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CompA1()),
+                        );
+                      },child: Text(
+                      data[index]['nama'],style: TextStyle(
+                      color: ColorConstants.textColor,
+                      fontSize: 18,
                     ),
-                  ),
-                  Text(
-                    "Estimasi Harga",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
                     ),
-                  ),
-                ],)
-              ),
-              SizedBox(height: 20,),
-              Container(
-                width: double.infinity,
-                color: Colors.grey,
-                alignment: Alignment.center,
-                child: Text(
-                  "Kedalaman sumur 20 m : Rp. 2.000.000 "
-                      "Kedalaman sumur 30 m : Rp. 3.000.000 "
-                      "Kedalaman sumur 40 m : Rp. 4.000.000 "
-                  "Kedalaman sumur 50 m : Rp. 5.000.000 "
-                  "",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              SizedBox(height: 40,),
-              Container(
-                width: double.infinity,
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: Text(
-                  "Daftar Perusahaan",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20,),
-              TextButton(
-                onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp1()
-                    ,
-                  ),
-                );
-                }, child: Text(
-                "Bandung Water Solution",style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-              ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20,),
-              TextButton(
-                onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp2()
-                    ,
-                  ),
-                );
-                }, child: Text(
-                "Ady Water",style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-              ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20,),
-              TextButton(
-                onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp3()
-                    ,
-                  ),
-                );
-                }, child: Text(
-                "Aneka Filter",style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-              ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20,),
-              TextButton(
-                onPressed: () async {Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>Comp4()
-                    ,
-                  ),
-                );
-                }, child: Text(
-                "Filter Air",style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-              ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.grey),
-                ),
-              ),
-            ],
-          ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.grey),
+                      ),
+                    ),
+                  );
+                }
+            )
         ),
       ), //
       // This trailing comma makes auto-formatting nicer for build methods.

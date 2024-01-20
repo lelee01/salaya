@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:salaya/jasa.dart';
 import 'package:salaya/air.dart';
 import 'package:salaya/login.dart';
+import 'package:salaya/profile.dart';
 
 import 'constant/akun.dart';
 import 'constant/constant.dart';
@@ -27,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (choice.title == 'Log Out') {
       handleSignOut();
     } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => profile()));
     }
   }
 
@@ -162,10 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 200,),
                   SizedBox(height: 20,width: 800,),
                   TextButton.icon(onPressed: () async {Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>Air(),
-                        ),
-                      );
-                      },
+                      MaterialPageRoute(
+                          builder: (context) => Air()));},
                         icon: const Icon(Icons.water_drop_outlined,color: Colors.white,),
                         label: Text("Penyedia Air", style: TextStyle(
                           fontSize: 18,
@@ -177,10 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       TextButton.icon(onPressed: () async {Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>Jasa(),
-                        ),
-                      );
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => Jasa()));},
                         icon: const Icon(Icons.engineering,color: Colors.white,),
                         label: Text("Penyedia Jasa", style: TextStyle(
                           fontSize: 18,
